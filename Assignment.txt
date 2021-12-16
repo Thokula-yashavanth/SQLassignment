@@ -1,0 +1,329 @@
+assignment 1
+
+1.Write a query to list all the employess who are working as clerk
+SELECT ENAME, JOB
+FROM EMP
+WHERE JOB IN('CLERK')
+
+2. Write a query to list the employees who are working as clerks or managers
+SELECT ENAME ,JOB
+FROM EMP
+WHERE JOB IN ('CLERK' , 'MANAGER');
+
+
+3. Write a query to get the current date
+SELECT GETDATE() AS CURRENTDATEANDTIME;
+
+
+4. Write a query to list the employees whose salaries are within the range of 500 and 1000
+SELECT ENAME, SAL
+FROM EMP
+WHERE SAL BETWEEN 500 AND 1000;
+
+
+
+5. Write a query to list the employees who have joined in the month of December
+SELECT HIREDATE,ENAME 
+FROM EMP
+WHERE MONTH(HIREDATE) = 12; 
+
+
+6. Write a query to list the employees whose salaries are not within  the range of 1000 and 2500
+SELECT ENAME, SAL
+FROM EMP
+WHERE SAL NOT BETWEEN 1000 AND 2500;
+
+
+7. Write a query who are getting 800, 950, 3000,5000
+SELECT ENAME, SAL
+FROM EMP
+WHERE SAL IN (800, 950, 3000,500);
+
+
+8. To list all the employees whose names are having ‘L’ as second character
+SELECT ENAME
+FROM EMP
+WHERE ENAME LIKE '_L%';
+
+
+9. To list all the employees whose names are having ‘D’ as last character 
+SELECT ENAME
+FROM EMP
+WHERE ENAME LIKE '%D';
+
+
+10. To list all the employees whose names are having just 5 characters as length? 
+SELECT ENAME
+FROM EMP
+WHERE LEN(ENAME)=5;
+
+
+11. To list all the employees whose names are starting with ‘T’ and ending with ‘R’ 
+SELECT ENAME
+FROM EMP
+WHERE ENAME LIKE 'T%R';
+
+
+
+12. Display those employees who's name contains "A"?
+SELECT ENAME
+FROM EMP
+WHERE ENAME LIKE '%A%';
+-----
+---13--
+
+
+14. What is the employee number of 'James' 
+SELECT ENAME, EMPNO
+FROM EMP
+WHERE ENAME = 'JAMES';
+
+15. What is the salary of 'king'?
+SELECT ENAME, SAL
+FROM EMP
+WHERE ENAME = 'KING';
+
+
+16. Who is the President for organization?
+SELECT ENAME, JOB
+FROM EMP
+WHERE JOB = 'PRESIDENT';
+
+
+17.  List all details of all the managers?
+SELECT *
+FROM EMP
+WHERE JOB = 'MANAGER';
+
+
+18. Give employee details for employees drawing commission?
+SELECT *
+FROM EMP
+WHERE COMM != 0;
+
+
+19. List employees who joined before april-1981?
+SELECT HIREDATE,ENAME
+FROM EMP
+WHERE HIREDATE < '1981-04-01';
+
+
+20. What is the salary of following: 
+21. King, Blake, Ford, Smith
+
+SELECT ENAME, SAL
+FROM EMP
+WHERE ENAME IN ('King', 'Blake', 'Ford', 'Smith');
+
+
+22. Who is drawing salary less than 3500
+SELECT SAL,ENAME
+FROM EMP
+WHERE SAL < 3500;
+
+
+23. List the details of all the clerks
+SELECT *
+FROM EMP
+WHERE JOB LIKE 'CLERK';
+
+
+25. if there is a hike in monthly salary by 20% for ford, what will be his annual Salary
+SELECT ENAME,SAL*12 AS ANUALSAL
+FROM EMP;
+
+
+26. What is the total salary for each department
+SELECT ENAME,((SAL*20)/100)*12 AS NEWANUALSAL
+FROM EMP
+WHERE ENAME = 'FORD';
+
+
+27. Who is drawing the lowest salary in dept 10
+SELECT DEPTNO,SUM(SAL) AS SUMSAL
+FROM EMP
+GROUP BY DEPTNO;
+
+
+28. What is the average salary for Managers
+SELECT ENAME,SAL,DEPTNO
+FROM   EMP
+WHERE  SAL =
+                (SELECT MIN(SAL)
+                 FROM   EMP
+				 WHERE DEPTNO = '10');
+
+
+29. What is the total salary for salesman
+SELECT JOB , AVG(SAL) AS AVGSAL
+FROM EMP
+WHERE JOB LIKE 'MANAGER'
+GROUP BY JOB;
+
+
+30. Which department is having the lowest average salary?
+SELECT JOB , SUM(SAL) AS TOTALSAL
+FROM EMP
+WHERE JOB LIKE 'SALESMAN'
+GROUP BY JOB;
+
+31. How many persons are in each role
+SELECT COUNT(JOB) AS NOOFPERSONS,JOB AS JOBROLE
+FROM EMP
+GROUP BY JOB;
+
+
+32. What is the highest salary among analyst
+SELECT MAX(SAL) AS HIGHSAL, JOB
+FROM EMP
+WHERE JOB IN ('ANALYST')
+GROUP BY JOB;
+
+
+33. What is the highest commission paid
+SELECT MAX(COMM) AS HIGHCOMM
+FROM EMP;
+
+
+34. How many departments are there
+SELECT COUNT(DISTINCT DNAME) AS Nodept
+FROM DEPT;
+
+
+35. List the names in which 3rd  character is L
+SELECT ENAME
+FROM EMP
+WHERE ENAME LIKE '__L%';
+
+2nd assignment
+
+
+
+1.
+SELECT DEPTNO
+FROM EMP
+WHERE EMPNO IS NULL ;
+
+2.
+
+SELECT ENAME,JOB
+FROM EMP
+WHERE COMM IS NULL ;
+
+3.
+select ename,sal,comm
+from emp e
+join
+dept d
+on loc='NEW YORK'
+where e.comm>1000;
+
+4
+select count(ename)
+from emp
+join
+dept
+on loc='chicago'
+
+5
+select ename
+from emp
+join
+dept
+on loc='chicago'
+
+
+6
+ select ename,loc
+from emp e
+join dept d
+on e.deptno=d.deptno
+order by loc;
+
+7
+SELECT COUNT(DISTINCT EMPNO) AS NOEMP,
+COUNT(DISTINCT DEPTNO) AS NODEPT
+FROM EMP;
+
+8
+SELECT e.ENAME,
+e.HIREDATE,
+m.ENAME,
+m.hIREDATE
+FROM EMP e,EMP m
+WHERE E.EMPNO=m.MGR and e.HIREDATE<m.HIREDATE;
+
+9
+SELECT COUNT(JOB) AS
+'NO_OF_MANAGER'
+FROM EMP
+WHERE JOB='MANAGER';
+
+10
+SELECT ENAME,
+JOB
+FROM EMP
+WHERE MGR IS NULL;
+
+11
+SELECT ENAME,
+DEPTNO
+FROM EMP
+WHERE ENAME='SMITH';
+
+12
+SELECT *
+FROM EMP,DEPT
+WHERE LOC != 'BOSTON' AND JOB LIKE 'SALESMAN';
+
+13
+SELECT EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO,NULL AS LOC
+FROM EMP
+UNION
+SELECT NULL,NULL,DNAME AS JOB ,NULL,NULL,NULL,NULL,DEPTNO,LOC
+FROM DEPT;
+
+14
+
+SELECT ENAME,JOB
+FROM EMP
+WHERE JOB LIKE 'SALESMAN' AND SAL < (SELECT SAL
+FROM EMP
+ WHERE ENAME LIKE 'MILLER');
+
+15
+
+SELECT *
+FROM EMP , DEPT
+WHERE LOC LIKE 'CHICAGO';
+
+16
+SELECT ENAME 
+FROM  EMP
+WHERE SAL > (SELECT MIN(SAL)
+FROM EMP
+WHERE JOB LIKE'MANAGER' );
+
+17
+SELECT ENAME,EMPNO
+FROM EMP , DEPT
+WHERE DNAME LIKE 'ACCOUNTING';
+
+18
+SELECT *
+FROM EMP
+WHERE JOB LIKE 'MANAGER';
+
+19
+SELECT JOB,SAL,
+CASE
+WHEN JOB != 'SALES'
+THEN 'NONSALES'
+WHEN SAL>1000 
+THEN 1000
+ELSE 'NULL'
+END 
+FROM EMP;
+
+20
+...
