@@ -1,0 +1,25 @@
+1.Write the SQL query to fetch the list of employees with same salary.
+
+SELECT *
+FROM Worker_details
+where Salary IN(
+               SELECT Salary
+   FROM Worker_Details
+   WHERE Worker_Id
+   NOT IN
+   (
+   SELECT
+   MAX(Worker_Id)
+   FROM Worker_Details
+   GROUP by Salary))
+
+
+2.Display the name of employees having the highest salary in each department.
+
+SELECT WORKER_ID,DEPARTMENT)
+FIRST_NAME,LAST_NAME
+FROM Worker_details
+WHERE SALARY IN(
+               SELECT MAX(SALARY)
+FROM WORKER DETAILS
+   GROUP BY DEPARTMENT)
